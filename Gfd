@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="dark" dir="rtl" lang="ar">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VS7 PRO - Multi-Page Application</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"/>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+        
+        :root {
+            --primary: #00f0ff;
+            --surface: #051424;
+            --surface-container: #122132;
+        }
+
+        body {
+            font-family: 'Geist', sans-serif;
+            background-color: var(--surface);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding-bottom: 80px;
+            padding-top: 64px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .glass-panel {
+            background: rgba(18, 33, 50, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: #000;
+            transition: all 0.2s;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.95);
+        }
+
+        .stats-card {
+            background: var(--surface-container);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-[#051424]">
+<!-- Header -->
+<header class="fixed top-0 w-full z-50 h-16 border-b border-white/10 bg-[#122132]/60 backdrop-blur-xl flex items-center justify-between px-6">
+<span class="material-icons-round text-primary-container">account_circle</span>
+<h1 class="text-xl font-bold tracking-tight text-[#00f0ff]">VS7 PRO</h1>
+<span class="material-icons-round text-[#00f0ff]">sensors</span>
+</header>
+<!-- Content Area -->
+<main id="app">
+<!-- Dashboard Page -->
+<section class="page active px-4" id="dashboard">
+<div class="mt-6">
+<h2 class="text-3xl font-bold mb-2">لوحة التحكم</h2>
+<p class="text-gray-400 text-sm mb-6">نظام إعادة بث الفيديو الاحترافي</p>
+<button class="w-full py-4 rounded-xl btn-primary font-bold flex items-center justify-center gap-2 mb-8" onclick="showPage('add-source')">
+<span class="material-icons-round">add_circle</span>
+                    بدء بث جديد
+                </button>
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="stats-card p-4 rounded-xl">
+<div class="flex justify-between items-center text-xs text-gray-400 mb-2">
+<span>RAM ALLOC</span>
+<span class="material-icons-round text-sm">memory</span>
+</div>
+<div class="text-xl font-bold">12.4 <span class="text-xs">GB</span></div>
+<div class="w-full bg-white/5 h-1 rounded-full mt-2">
+<div class="bg-green-400 h-full w-[65%] rounded-full"></div>
+</div>
+</div>
+<div class="stats-card p-4 rounded-xl">
+<div class="flex justify-between items-center text-xs text-gray-400 mb-2">
+<span>CPU USAGE</span>
+<span class="material-icons-round text-sm">settings_input_component</span>
+</div>
+<div class="text-xl font-bold">42 <span class="text-xs">%</span></div>
+<div class="w-full bg-white/5 h-1 rounded-full mt-2">
+<div class="bg-blue-400 h-full w-[42%] rounded-full"></div>
+</div>
+</div>
+</div>
+<h3 class="text-lg font-bold mb-4 flex justify-between items-center">
+<span>البث المباشر النشط</span>
+<span class="text-xs bg-white/5 px-2 py-1 rounded">Total: 2</span>
+</h3>
+<!-- Active Stream Card -->
+<div class="glass-panel rounded-2xl overflow-hidden mb-6">
+<div class="relative aspect-video bg-black">
+<div class="absolute top-3 left-3 flex items-center gap-2">
+<span class="bg-red-600 text-[10px] px-2 py-0.5 rounded-full animate-pulse">ON AIR</span>
+<span class="bg-black/50 backdrop-blur-md text-[10px] px-2 py-0.5 rounded-full">1080p60</span>
+</div>
+<img alt="Stream Preview" class="w-full h-full object-cover opacity-60" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="p-4">
+<div class="flex justify-between items-center mb-4">
+<h4 class="font-bold">Main Encoder 01</h4>
+<span class="material-icons-round text-gray-500">settings</span>
+</div>
+<div class="grid grid-cols-2 gap-y-3 text-[10px] text-gray-400 uppercase tracking-wider">
+<div>VIDEO BITRATE<br/><span class="text-white text-xs">6.5 Mbps</span></div>
+<div>AUDIO BITRATE<br/><span class="text-white text-xs">256 Kbps</span></div>
+<div>DROPPED FRAMES<br/><span class="text-white text-xs">0 (0.0%)</span></div>
+<div>UPTIME<br/><span class="text-white text-xs">04:12:33</span></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Add Source Page -->
+<section class="page px-4" id="add-source">
+<div class="mt-8 text-center mb-10">
+<span class="bg-blue-600/20 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/30">الخطوة 1</span>
+<h2 class="text-4xl font-bold mt-4 mb-4">إضافة مصدر فيديو</h2>
+<p class="text-gray-400 text-sm leading-relaxed">أدخل رابط الفيديو المتاح للبدء في عملية إعادة بث المحتوى.</p>
+</div>
+<div class="glass-panel p-6 rounded-2xl">
+<div class="space-y-6">
+<div>
+<label class="text-xs text-gray-400 mb-2 block flex items-center gap-2">
+<span class="material-icons-round text-sm">label</span> اسم المصدر
+                        </label>
+<input class="w-full bg-[#051424] border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-[#00f0ff] transition-colors" placeholder="مثال: الكاميرا الرئيسية - الملعب أ" type="text"/>
+<p class="text-[10px] text-gray-500 mt-2">يستخدم للتعريف الداخلي في لوحة التحكم</p>
+</div>
+<div>
+<label class="text-xs text-gray-400 mb-2 block flex items-center gap-2">
+<span class="material-icons-round text-sm">link</span> رابط الفيديو (m3u8, mp4, ts)
+                        </label>
+<input class="w-full bg-[#051424] border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-[#00f0ff] transition-colors" placeholder="https://example.com/stream/playlist" type="text"/>
+</div>
+<div class="pt-4 border-t border-white/5">
+<button class="w-full py-4 rounded-xl btn-primary font-bold flex items-center justify-center gap-2" onclick="showPage('settings')">
+                            متابعة
+                            <span class="material-icons-round">arrow_back</span>
+</button>
+<button class="w-full py-3 mt-2 text-gray-400 text-sm font-medium" onclick="showPage('dashboard')">إلغاء</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Streaming Settings Page -->
+<section class="page px-4" id="settings">
+<div class="mt-8 text-center mb-8">
+<span class="bg-blue-600/20 text-blue-400 text-xs px-3 py-1 rounded-full border border-blue-500/30">الخطوة 2</span>
+<h2 class="text-3xl font-bold mt-4">وجهة البث (RTMP)</h2>
+</div>
+<div class="glass-panel p-6 rounded-2xl space-y-8">
+<section>
+<h3 class="text-gray-400 text-sm mb-4 border-b border-white/5 pb-2">إعدادات الاتصال</h3>
+<div class="space-y-4">
+<div>
+<label class="text-xs text-gray-500 mb-1 block">سيرفر RTMP</label>
+<div class="relative">
+<input class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 pr-10 text-sm" type="text" value="rtmp://server.url/app"/>
+<span class="material-icons-round absolute right-3 top-3 text-gray-600">link</span>
+</div>
+</div>
+<div>
+<label class="text-xs text-gray-500 mb-1 block">مفتاح البث (Stream Key)</label>
+<div class="relative">
+<input class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 pr-10 text-sm" type="password" value="••••••••••••••••"/>
+<span class="material-icons-round absolute right-3 top-3 text-gray-600">vpn_key</span>
+<span class="material-icons-round absolute left-3 top-3 text-gray-600 text-sm">visibility</span>
+</div>
+</div>
+<button class="text-[#00f0ff] text-xs flex items-center gap-1">
+<span class="material-icons-round text-sm">add_circle_outline</span> إنشاء عنوان RTMP جديد
+                        </button>
+</div>
+</section>
+<section>
+<h3 class="text-gray-400 text-sm mb-4 border-b border-white/5 pb-2">جودة الإخراج</h3>
+<div class="space-y-4">
+<div>
+<label class="text-xs text-gray-500 mb-1 block">جودة الصورة</label>
+<select class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-sm outline-none appearance-none">
+<option>1080p (FHD) - 6000 kbps</option>
+<option>720p (HD) - 3500 kbps</option>
+</select>
+</div>
+<div>
+<label class="text-xs text-gray-500 mb-1 block">جودة الصوت</label>
+<select class="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-3 text-sm outline-none appearance-none">
+<option>AAC - 160 kbps</option>
+<option>MP3 - 128 kbps</option>
+</select>
+</div>
+</div>
+</section>
+<div class="flex gap-4 pt-4">
+<button class="flex-1 py-4 btn-primary rounded-xl font-bold flex items-center justify-center gap-2" onclick="showPage('dashboard')">
+                        حفظ وتشغيل
+                        <span class="material-icons-round">rocket_launch</span>
+</button>
+<button class="w-20 border border-white/10 rounded-xl flex items-center justify-center text-gray-400" onclick="showPage('add-source')">
+<span class="material-icons-round">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- FAQ/Help Page -->
+<section class="page px-4" id="help">
+<div class="text-center mt-8 mb-8">
+<div class="w-16 h-16 bg-[#00f0ff]/10 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-[#00f0ff]/20">
+<span class="material-icons-round text-[#00f0ff] text-3xl">support_agent</span>
+</div>
+<h2 class="text-4xl font-bold mb-4">الأسئلة الشائعة والدعم</h2>
+<p class="text-gray-400 text-sm px-6">مركز المساعدة التقنية لـ VS7 PRO. ابحث عن إجابات سريعة لحل مشكلات البث.</p>
+</div>
+<div class="relative mb-8">
+<input class="w-full bg-[#122132] border border-white/10 rounded-2xl py-4 pr-12 pl-24 outline-none focus:border-[#00f0ff]" placeholder="ابحث عن مساعدة (مثال: إعدادات RTMP)..." type="text"/>
+<span class="material-icons-round absolute right-4 top-4 text-gray-500">search</span>
+<button class="absolute left-2 top-2 bg-[#00f0ff] text-black font-bold h-10 px-6 rounded-xl">بحث</button>
+</div>
+<div class="space-y-3 mb-10">
+<div class="glass-panel p-4 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center text-gray-400">
+<span class="material-icons-round">cast</span>
+</div>
+<span class="font-medium text-sm">كيف أضيف عنوان RTMP؟</span>
+</div>
+<span class="material-icons-round text-gray-600">expand_more</span>
+</div>
+<div class="glass-panel p-4 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center text-gray-400">
+<span class="material-icons-round">graphic_eq</span>
+</div>
+<span class="font-medium text-sm">كيف أتحكم في صوت البث؟</span>
+</div>
+<span class="material-icons-round text-gray-600">expand_more</span>
+</div>
+<div class="glass-panel p-4 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center text-gray-400">
+<span class="material-icons-round">high_quality</span>
+</div>
+<span class="font-medium text-sm">كيف أضبط جودة الصورة؟</span>
+</div>
+<span class="material-icons-round text-gray-600">expand_more</span>
+</div>
+</div>
+<div class="bg-gradient-to-br from-[#00f0ff]/20 to-transparent border-l-4 border-[#00f0ff] p-6 rounded-2xl">
+<h4 class="font-bold mb-2">لم تجد إجابة لسؤالك؟</h4>
+<p class="text-xs text-gray-400 mb-4">فريق الدعم المتقدم متاح على مدار الساعة للمشغلين الاحترافيين.</p>
+<button class="w-full bg-[#00f0ff] text-black font-bold py-3 rounded-xl flex items-center justify-center gap-2">
+<span class="material-icons-round">headset_mic</span>
+                    فتح تذكرة دعم
+                </button>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 w-full z-50 h-20 border-t border-white/10 bg-[#010f1f]/80 backdrop-blur-2xl flex justify-around items-center px-4">
+<button class="nav-item active flex flex-col items-center gap-1" onclick="showPage('dashboard')">
+<span class="material-icons-round">dashboard</span>
+<span class="text-[10px] font-bold uppercase">الرئيسية</span>
+</button>
+<button class="nav-item flex flex-col items-center gap-1 text-gray-500" onclick="showPage('add-source')">
+<span class="material-icons-round">settings_input_component</span>
+<span class="text-[10px] font-bold uppercase">المصادر</span>
+</button>
+<button class="nav-item flex flex-col items-center gap-1 text-gray-500" onclick="showPage('settings')">
+<span class="material-icons-round">publish</span>
+<span class="text-[10px] font-bold uppercase">الأهداف</span>
+</button>
+<button class="nav-item flex flex-col items-center gap-1 text-gray-500">
+<span class="material-icons-round">analytics</span>
+<span class="text-[10px] font-bold uppercase">المراقبة</span>
+</button>
+<button class="nav-item flex flex-col items-center gap-1 text-gray-500" onclick="showPage('help')">
+<span class="material-icons-round">help_center</span>
+<span class="text-[10px] font-bold uppercase">المساعدة</span>
+</button>
+</nav>
+<script>
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show target page
+            document.getElementById(pageId).classList.add('active');
+
+            // Update Nav Icons
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active', 'text-[#00f0ff]');
+                item.classList.add('text-gray-500');
+            });
+
+            // Find matching nav item
+            const pageToNavMap = {
+                'dashboard': 0,
+                'add-source': 1,
+                'settings': 2,
+                'help': 4
+            };
+
+            const navIndex = pageToNavMap[pageId];
+            if (navIndex !== undefined) {
+                const activeNav = document.querySelectorAll('.nav-item')[navIndex];
+                activeNav.classList.add('active', 'text-[#00f0ff]');
+                activeNav.classList.remove('text-gray-500');
+            }
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
